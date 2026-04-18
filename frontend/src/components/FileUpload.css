@@ -1,0 +1,200 @@
+.upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drop-zone {
+  position: relative;
+  border: 1.5px dashed var(--border-bright);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
+  padding: 40px 32px;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+  outline: none;
+  overflow: hidden;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-zone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, var(--accent-dim) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+}
+
+.drop-zone:hover:not(.disabled)::before,
+.drop-zone.dragging::before {
+  opacity: 1;
+}
+
+.drop-zone:hover:not(.disabled),
+.drop-zone:focus-visible:not(.disabled) {
+  border-color: var(--accent);
+  background: var(--bg-hover);
+}
+
+.drop-zone.dragging {
+  border-color: var(--accent);
+  border-style: solid;
+  background: var(--bg-hover);
+  animation: pulse-glow 1.2s ease infinite;
+}
+
+.drop-zone.has-file {
+  border-style: solid;
+  border-color: var(--border-bright);
+}
+
+.drop-zone.has-file:hover:not(.disabled) {
+  border-color: var(--accent);
+}
+
+.drop-zone.error {
+  border-color: var(--danger);
+}
+
+.drop-zone.disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+/* Corner brackets */
+.corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--accent);
+  border-style: solid;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.drop-zone:hover:not(.disabled) .corner,
+.drop-zone.dragging .corner { opacity: 1; }
+.corner-tl { top: 8px; left: 8px; border-width: 2px 0 0 2px; }
+.corner-tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+.corner-bl { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; }
+.corner-br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+
+.file-input-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.drop-zone-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+/* Empty state */
+.upload-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.drop-label {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+.drop-sublabel {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.click-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.type-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.type-chip {
+  padding: 2px 10px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+}
+
+/* Selected file state */
+.file-icon-big {
+  font-size: 2.4rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.3));
+}
+
+.file-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+}
+
+.file-name {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  word-break: break-all;
+  max-width: 340px;
+}
+
+.file-meta {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.change-hint {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.upload-error-msg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--danger);
+  padding: 6px 10px;
+  background: var(--danger-dim);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 61, 113, 0.2);
+}
